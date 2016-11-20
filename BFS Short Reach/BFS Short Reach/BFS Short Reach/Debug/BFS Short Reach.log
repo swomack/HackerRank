@@ -1,4 +1,4 @@
 ﻿  Source.cpp
-d:\works\acm\hackerrank\bfs short reach\bfs short reach\bfs short reach\source.cpp(22): error C2131: expression did not evaluate to a constant
-  d:\works\acm\hackerrank\bfs short reach\bfs short reach\bfs short reach\source.cpp(22): note: failure was caused by non-constant arguments or reference to a non-constant symbol
-  d:\works\acm\hackerrank\bfs short reach\bfs short reach\bfs short reach\source.cpp(22): note: see usage of 'n'
+d:\acm\hackerrank\bfs short reach\bfs short reach\bfs short reach\source.cpp(88): warning C4018: '<': signed/unsigned mismatch
+  BFS Short Reach.vcxproj -> D:\ACM\HackerRank\BFS Short Reach\BFS Short Reach\Debug\BFS Short Reach.exe
+  BFS Short Reach.vcxproj -> D:\ACM\HackerRank\BFS Short Reach\BFS Short Reach\Debug\BFS Short Reach.pdb (Partial PDB)
