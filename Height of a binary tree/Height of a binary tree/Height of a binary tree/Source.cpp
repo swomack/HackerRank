@@ -45,7 +45,11 @@ public:
 	int getHeight(Node* root) 
 	{
 		if (root == NULL)
-			return -1;
+			return 0;
+
+		if (root->left == NULL && root->right == NULL)
+			return 0;
+
 		return max(getHeight(root->left), getHeight(root->right)) + 1;
 	}
 
