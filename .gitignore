@@ -61,3 +61,7 @@ Equal Stack/Equal Stack/Equal Stack/Debug/Equal Stack.tlog/link.write.1.tlog
 Equal Stack/Equal Stack/Equal Stack/Debug/Source.obj
 Equal Stack/Equal Stack/Equal Stack/Debug/vc140.idb
 Equal Stack/Equal Stack/Equal Stack/Debug/vc140.pdb
+*.db
+*.tlog
+*.lastbuildstate
+*.idb
