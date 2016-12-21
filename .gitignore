@@ -65,3 +65,9 @@ Equal Stack/Equal Stack/Equal Stack/Debug/vc140.pdb
 *.tlog
 *.lastbuildstate
 *.idb
+*.suo
+*.log
+*.obj
+*.pdb
+*.exe
+*.ilk
