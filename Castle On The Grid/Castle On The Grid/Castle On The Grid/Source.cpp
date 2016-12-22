@@ -6,34 +6,137 @@
 
 using namespace std;
 
-int distance(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited)
+int goLeft(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited);
+int goRight(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited);
+int goUp(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited);
+int goDown(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited);
+
+int goLeft(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited)
 {
 	if (a < 0 || b < 0 || a >= matrix.size() || b >= matrix[0].size())
-		return INT_MAX;
+		return INT_MAX - 1;
 
 	if (matrix[a][b] == 'X')
-		return INT_MAX;
+		return INT_MAX - 1;
 
 	if (a == c && b == d)
 		return 0;
 
 	if (visited[a][b])
-		return INT_MAX;
+		return INT_MAX - 1;
 
 	if (distances[a][b] != -1)
 		return distances[a][b];
 
 	visited[a][b] = true;
 
-	int dhf = distance(matrix, a, b + 1, c, d, distances, visited);
-	int dhb = distance(matrix, a, b - 1, c, d, distances, visited);
-	int dvf = distance(matrix, a + 1, b, c, d, distances, visited);
-	int dvb = distance(matrix, a - 1, b, c, d, distances, visited);
+	int dL = goLeft(matrix, a, b - 1, c, d, distances, visited);
+	int dU = goUp(matrix, a - 1, b, c, d, distances, visited) + 1;
+	int dD = goDown(matrix, a + 1, b, c, d, distances, visited) + 1;
+	
 
-	int dh = min(dhf, dhb);
-	int dv = min(dvf, dvb);
+	distances[a][b] = min(min(dL, dU), dD);
 
-	distances[a][b] = 1 + min(dh, dv);
+	return distances[a][b];
+}
+
+int goRight(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited)
+{
+	if (a < 0 || b < 0 || a >= matrix.size() || b >= matrix[0].size())
+		return INT_MAX - 1;
+
+	if (matrix[a][b] == 'X')
+		return INT_MAX - 1;
+
+	if (a == c && b == d)
+		return 0;
+
+	if (visited[a][b])
+		return INT_MAX - 1;
+
+	if (distances[a][b] != -1)
+		return distances[a][b];
+
+	visited[a][b] = true;
+
+	int dL = goRight(matrix, a, b + 1, c, d, distances, visited);
+	int dU = goUp(matrix, a - 1, b, c, d, distances, visited) + 1;
+	int dD = goDown(matrix, a + 1, b, c, d, distances, visited) + 1;
+
+
+	distances[a][b] = min(min(dL, dU), dD);
+
+	return distances[a][b];
+}
+
+int goUp(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited)
+{
+	if (a < 0 || b < 0 || a >= matrix.size() || b >= matrix[0].size())
+		return INT_MAX - 1;
+
+	if (matrix[a][b] == 'X')
+		return INT_MAX - 1;
+
+	if (a == c && b == d)
+		return 0;
+
+	if (visited[a][b])
+		return INT_MAX - 1;
+
+	if (distances[a][b] != -1)
+		return distances[a][b];
+
+	visited[a][b] = true;
+
+	int dL = goRight(matrix, a, b + 1, c, d, distances, visited) + 1;
+	int dU = goLeft(matrix, a, b - 1, c, d, distances, visited) + 1;
+	int dD = goUp(matrix, a - 1, b, c, d, distances, visited);
+
+
+	distances[a][b] = min(min(dL, dU), dD);
+
+	return distances[a][b];
+}
+
+int goDown(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited)
+{
+	if (a < 0 || b < 0 || a >= matrix.size() || b >= matrix[0].size())
+		return INT_MAX - 1;
+
+	if (matrix[a][b] == 'X')
+		return INT_MAX - 1;
+
+	if (a == c && b == d)
+		return 0;
+
+	if (visited[a][b])
+		return INT_MAX - 1;
+
+	if (distances[a][b] != -1)
+		return distances[a][b];
+
+	visited[a][b] = true;
+
+	int dL = goRight(matrix, a, b + 1, c, d, distances, visited) + 1;
+	int dU = goLeft(matrix, a, b - 1, c, d, distances, visited) + 1;
+	int dD = goDown(matrix, a + 1, b, c, d, distances, visited);
+
+
+	distances[a][b] = min(min(dL, dU), dD);
+
+	return distances[a][b];
+}
+
+int distance(vector<vector<char>>& matrix, int a, int b, int c, int d, vector<vector<int>> &distances, vector<vector<bool>>& visited)
+{
+	visited[a][b] = true;
+
+	int dR = goRight(matrix, a, b + 1, c, d, distances, visited) + 1;
+	int dL = goLeft(matrix, a, b - 1, c, d, distances, visited) + 1;
+	int dD = goDown(matrix, a + 1, b, c, d, distances, visited) + 1;
+	int dU = goUp(matrix, a - 1, b, c, d, distances, visited) + 1;
+
+	distances[a][b] = min(min(dL, dR), min(dD, dU));
 
 	return distances[a][b];
 }
